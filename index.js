@@ -1,6 +1,6 @@
 const VerificationBot = require('./libs/verification-bot');
 
-const bot = new VerificationBot(/*INSERT TOKEN HERE*/);
+const bot = new VerificationBot('488153596:AAH9E0WA1l32rOIp04kPGYagL6090VBh8pc');
 bot.on('sending_error', (log) => {
   console.log('sending_error:', log);
 });
@@ -20,13 +20,13 @@ bot.on('publish_cards_request', (data) => {
   data.cards = [
     {
       id: 0,
-      cardNumber: '0000',
-      balance: 400000
+      cardNumber: '4561 2612 1234 5467',
+      balance: 16516
     },
     {
       id: 1,
-      cardNumber: '0001',
-      balance: 999999
+      cardNumber: '4916 0447 1091 2927',
+      balance: 15878
     }
   ];
   bot.publishCardsRequest(data);
@@ -61,9 +61,17 @@ bot.on('publish_transactions_request', (data) => {
   ];
   bot.publishOperationRequest(data);
 });
+bot.on('create_card', (data) => {
+  const { chatID, cardNumber } = data;
+  bot.send('message', {chatID, message: 'Карта добавлена'})
+});
+bot.on('delete_card', (data) => {
+  const { chatID, id } = data;
+  bot.send('message', {chatID, message: 'Карта удалена'})
+});
 bot.send('touch', {
   chatID: 31059467,
   code: 2128,
   operationID: 2,
-  message: 'SOME ACTION'
+  message: 'Подтвердите транзакцию по карте на сумму 10р.'
 });
