@@ -1,6 +1,6 @@
 const VerificationBot = require('./libs/verification-bot');
 
-const bot = new VerificationBot('488153596:AAH9E0WA1l32rOIp04kPGYagL6090VBh8pc');
+const bot = new VerificationBot(/*TOKEN*/);
 bot.on('sending_error', (log) => {
   console.log('sending_error:', log);
 });
